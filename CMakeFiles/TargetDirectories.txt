@@ -1,0 +1,5 @@
+C:/Users/elkanam/Documents/RT_Embedded_Linux/Arm_Embedded_courcse/vscode/nucleo_f411_blincky2/f756_freertos_queue/CMakeFiles/f756_freertos_queue.dir
+C:/Users/elkanam/Documents/RT_Embedded_Linux/Arm_Embedded_courcse/vscode/nucleo_f411_blincky2/f756_freertos_queue/CMakeFiles/edit_cache.dir
+C:/Users/elkanam/Documents/RT_Embedded_Linux/Arm_Embedded_courcse/vscode/nucleo_f411_blincky2/f756_freertos_queue/CMakeFiles/rebuild_cache.dir
+C:/Users/elkanam/Documents/RT_Embedded_Linux/Arm_Embedded_courcse/vscode/nucleo_f411_blincky2/f756_freertos_queue/cmake/stm32cubemx/CMakeFiles/edit_cache.dir
+C:/Users/elkanam/Documents/RT_Embedded_Linux/Arm_Embedded_courcse/vscode/nucleo_f411_blincky2/f756_freertos_queue/cmake/stm32cubemx/CMakeFiles/rebuild_cache.dir

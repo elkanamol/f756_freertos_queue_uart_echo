@@ -1,0 +1,84 @@
+# Build directories
+build/
+Debug/
+Release/
+.settings/
+
+# IDE specific
+.vscode/
+.idea/
+*.launch
+.project
+.cproject
+.mxproject
+
+# STM32CubeIDE specific
+.metadata/
+RemoteSystemsTempFiles/
+.settings/
+*.launch
+
+# Build artifacts
+*.o
+*.d
+*.eep
+*.elf
+*.hex
+*.bin
+*.list
+*.map
+*.su
+
+# Backup files
+*.bak
+*~
+*.swp
+
+# Dependencies
+*.dep
+
+# Generated files
+RTE/
+EWARM/
+MDK-ARM/
+ARMCC/
+
+# Toolchain specific
+*.crf
+*.axf
+*.lnp
+*.htm
+*.sct
+*.dep
+*.lst
+*.i
+*.iex
+
+# OS specific
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# CMSIS specific
+Drivers/CMSIS/NN/
+Drivers/CMSIS/DSP/
+Drivers/CMSIS/docs/
+Drivers/CMSIS/RTOS2/
+Drivers/CMSIS/Core_A/
+Drivers/CMSIS/DAP/
+Drivers/CMSIS/Pack/
+
+# Keep these files
+!Drivers/STM32F7xx_HAL_Driver/
+!Drivers/CMSIS/Device/
+!Drivers/CMSIS/Include/
+!Core/Inc/
+!Core/Src/
+!startup/
+!.gitignore
+!README.md
+!LICENSE
