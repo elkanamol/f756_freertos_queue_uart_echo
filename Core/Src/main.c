@@ -23,6 +23,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <string.h>
+#include "queue_private.h"
 
 /* USER CODE END Includes */
 
@@ -65,6 +66,7 @@ const osMessageQueueAttr_t ProducerQueue01_attributes = {
   .name = "ProducerQueue01"
 };
 /* USER CODE BEGIN PV */
+static CustomQueue_t messageQueue;
 
 /* USER CODE END PV */
 
@@ -126,7 +128,13 @@ int main(void)
                       (uint8_t *)"---------------------\n--------------------\r\n", 
                       sizeof "---------------------\n--------------------\r\n", 
                       1000);
-                      
+
+  if (queue_init(&messageQueue, 5) != pdPASS)
+  {
+    HAL_UART_Transmit(&huart3, (uint8_t *)"Error to create queue\r\n",
+                      sizeof "Error to create queue\r\n", 1000);
+    Error_Handler();
+  }
   /* USER CODE END 2 */
 
   /* Init scheduler */
@@ -146,7 +154,7 @@ int main(void)
 
   /* Create the queue(s) */
   /* creation of ProducerQueue01 */
-  ProducerQueue01Handle = osMessageQueueNew (16, sizeof(uint8_t) * MAX_BUFFER_SIZE, &ProducerQueue01_attributes);
+  // ProducerQueue01Handle = osMessageQueueNew (16, sizeof(uint8_t) * MAX_BUFFER_SIZE, &ProducerQueue01_attributes);
 
   /* USER CODE BEGIN RTOS_QUEUES */
   /* add queues, ... */
@@ -408,7 +416,10 @@ static void MX_GPIO_Init(void)
             buffer[bytes_read++] = '\n';
           }
           // Send accumulated buffer to queue
-          osMessageQueuePut(ProducerQueue01Handle, buffer, 0, 0);
+          //osMessageQueuePut(ProducerQueue01Handle, buffer, 0, 0);
+
+          queue_send(&messageQueue, buffer, bytes_read);
+
           // Reset for next message
           memset(buffer, 0, MAX_BUFFER_SIZE);
           bytes_read = 0;
@@ -430,14 +441,18 @@ static void MX_GPIO_Init(void)
   {
     /* USER CODE BEGIN Task02_function */
     uint8_t buffer[MAX_BUFFER_SIZE] = {0};
-    uint8_t msg_prio = 0;
+    // uint8_t msg_prio = 0;
 
     /* Infinite loop */
     for(;;)
     {
-      if (osMessageQueueGet(ProducerQueue01Handle, buffer, &msg_prio, osWaitForever) == osOK) {
-        // Echo received data back through UART
-        HAL_UART_Transmit(&huart3, buffer, strlen((char*)buffer), 100);
+      // if (osMessageQueueGet(ProducerQueue01Handle, buffer, &msg_prio, osWaitForever) == osOK) {
+      //   // Echo received data back through UART
+      //   HAL_UART_Transmit(&huart3, buffer, strlen((char*)buffer), 100);
+      // }
+      if (queue_receive(&messageQueue, buffer, MAX_BUFFER_SIZE) == pdPASS)
+      {
+        HAL_UART_Transmit(&huart3, buffer, strlen((char *)buffer), 100);
       }
       osDelay(1);
     }
